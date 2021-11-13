@@ -1,0 +1,10 @@
+9
+west
+tax
+size
+sea
+use
+think
+yard
+word
+town
