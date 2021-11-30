@@ -1,3 +1,6 @@
+from math import sqrt
+
+
 def check_and_transform_to_complex(func):
     def new_func(*args, **kwargs):
         new_args = []
@@ -47,3 +50,12 @@ class Complex:
         re = (self.re * other.re + self.im * other.im)/denominator
         im = (self.im * other.re - self.re * other.im)/denominator
         return Complex(re, im)
+
+    # Part 4
+    @check_and_transform_to_complex
+    def __eq__(self, other):
+        return self.re == other.re and self.im == other.im
+
+    @check_and_transform_to_complex
+    def __abs__(self):
+        return sqrt(self.re**2 + self.im**2)
