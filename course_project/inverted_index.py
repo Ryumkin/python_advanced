@@ -1,3 +1,7 @@
+import json
+import pickle
+
+
 def load_document(filepath: str, encoding: str = "utf8") -> dict:
     with open(filepath, "r", encoding=encoding) as reader:
         return {int(key): value.strip() for key, value in
@@ -21,6 +25,10 @@ class InvertedIndex:
         sets = [self.inverted_indexes.get(word, set()) for word in words]
         return set(set.intersection(*sets))
 
-# articles = load_document("wikipedia_sample.txt")
-# inv_index = build_inverted_index(articles)
-# inv_index.query(['Python'])
+    def dump(self, filepath):
+        pickle.dump(self, open(filepath, 'wb'))
+
+    @classmethod
+    def load(cls, filepath):
+        obj = pickle.load(open(filepath, 'rb'))
+        return obj
