@@ -12,13 +12,15 @@ def build_inverted_index(articles):
             article_ids.add(int(article_id))
     return InvertedIndex(inverted_indexes)
 
-#
-# class InvertedIndex:
-#     def __init__(self, inverted_indexes: dict):
-#         self.inverted_indexes = inverted_indexes
-#
-#     def query(self, words):
-#         most_common_articles = {}
-#         for word in words:
-#
-#         return  # set of common article_id for all words
+
+class InvertedIndex:
+    def __init__(self, inverted_indexes: dict):
+        self.inverted_indexes = inverted_indexes
+
+    def query(self, words):
+        sets = [self.inverted_indexes.get(word, set()) for word in words]
+        return set(set.intersection(*sets))
+
+# articles = load_document("wikipedia_sample.txt")
+# inv_index = build_inverted_index(articles)
+# inv_index.query(['Python'])
